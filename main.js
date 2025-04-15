@@ -64,4 +64,48 @@ delete user.age;
 
 
 // Array
+const nama_buah = new Array('semangka', 'mangga', 'pisang', 'jambu'); // object constructor (yg dalam kurung bisa diisi array length jg)
+console.log(nama_buah);
 
+// pake array from -> bisa buat breakdown string jadi array char bisa juga buat duplikat array lain (contoh 2)
+const nama2 = 'udin sedunia';
+const breakdown_nama2 =  Array.from(nama2); 
+//contoh2
+const nama_buah_duplikat = Array.from(nama_buah); 
+
+//Literal 
+const nama_hewan = ['ayam', 'sapi', 'ikan'];
+
+/*
+ada operasi dan method juga: 
+1. .push(added_item) -> buat nambahin element di slot terakhir
+2. delete nama_array -> ngapus element tapi slot masih ada 
+3. .splice(index berapa, berapa element [bakal berurutan]) -> ngapus element dan juga slotnya
+4. .shift() -> buat ngapus element pertama dan .pop() -> vice versa
+5. .reverse() -> ngebalik urutan element
+6. .sort()
+*/
+
+
+// Map -> mirip object tapi lebih canggih 
+// key di object cm boleh string sedangkan di map key-nya bisa apa aja
+const productMap = new Map([
+  ["shoes", 500],
+  ["cap", 350],
+  ["jeans", 250],
+]);
+
+console.log(productMap); // bikinnya pake object constructor
+
+const nama_tetangga = new Map(); 
+// buat nambahin key values di Map kita pake .set(key, value)
+nama_tetangga.set('firstName', "ivan"); 
+nama_tetangga.set('lastName', "gunawan"); 
+console.log(nama_tetangga);
+
+// buat akses value Map kita pake .get(key)
+console.log(nama_tetangga.get('firstName'));  
+
+//ngapus pake .delete(key)
+nama_tetangga.delete('lastName');
+console.log(nama_tetangga.get('lastName'));  
