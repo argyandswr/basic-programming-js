@@ -109,3 +109,54 @@ console.log(nama_tetangga.get('firstName'));
 //ngapus pake .delete(key)
 nama_tetangga.delete('lastName');
 console.log(nama_tetangga.get('lastName'));  
+
+
+// Set -> spesial karena ga punya key n value dan data yg disimpan ga ada yg duplikat
+const mySet = new Set([1, 1, 1, 2, 3, 4]); // kalo dimasukin gini bakal nampil sekali doang 1-nya
+// buat nambahin nilai di set
+const mySet2 = new Set();
+mySet.add("anjay");
+mySet.add("mabar");
+// untuk akses nilainya bisa pake .foreach() atau pake looping
+mySet.forEach((values) => console.log (values));
+
+for (const numbers of mySet2){
+  console.log(numbers);
+}
+
+// bisa delete jg pake .delete(isi value)
+
+
+// Spread Operator -> to spread values on array/obj (...nama_object/array)
+// bisa buat ngecopy isi dari suatu array/obj bisa juga untuk ngegabungin lebih dari 1 arrray/obj
+
+// ngegabungin
+const myObj1 = {nama : 'Udin'}; 
+const myObj2 = {namaAkhir : 'Sedunia', hobi : 'mancing mania'};
+const newObj = {...myObj1, ...myObj2}; 
+
+console.log(newObj); // output: { nama: 'Udin', namaAkhir: 'Sedunia', hobi: 'mancing mania' }
+
+// ngecopy
+const myArr = ['ayam', 'ikan', 'udang'];
+const newArr = [...myArr]; 
+
+console.log(newArr); // output: [ 'ayam', 'ikan', 'udang' ]
+
+
+// Rest Operator -> memungkinkan function buat punya parameter dlm bentuk array
+// sehingga ga masukin kebanyakan argumen di parameter
+function myFunction (...manyArgs){
+  console.log(manyArgs.length);
+  console.log(manyArgs); 
+}
+
+myFunction("satu", "Dua", "tiga", "empat"); // disimpan dalam bentuk array -> bisa pake method .arraylength
+
+// bisa juga dipake buat nangkep sisa nilai kalo destructuring array
+const ikan = ['lele', 'bandeng', 'gurame', 'mujair', 'mas', 'nila', 'gabus']; 
+
+const [ikan1, ikan2, ...rest] = ikan;
+console.log(ikan1);
+console.log(ikan2);
+console.log(rest); // nyimpen sisa nilai yg belum ditangkap di ikan1 dan ikan2
