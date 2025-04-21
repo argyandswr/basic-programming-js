@@ -160,3 +160,18 @@ const [ikan1, ikan2, ...rest] = ikan;
 console.log(ikan1);
 console.log(ikan2);
 console.log(rest); // nyimpen sisa nilai yg belum ditangkap di ikan1 dan ikan2
+
+
+// error handling 
+try {
+  console.log("Starting program");
+  throw error("eittss error nih brok!!")
+} catch (e){
+  console.log("weyy ada error nihhh")
+}
+finally{
+  console.log("ini finally!!")
+} // finally bakal dijalanin di semua kondisi
+
+
+
