@@ -167,11 +167,40 @@ try {
   console.log("Starting program");
   throw error("eittss error nih brok!!")
 } catch (e){
-  console.log("weyy ada error nihhh")
+  console.log("weyy ada error nihhh") 
 }
 finally{
-  console.log("ini finally!!")
+  console.log("ini finally!!") 
 } // finally bakal dijalanin di semua kondisi
 
 
+//object composition
+const hasStock = (stock) => ({
+  checkStock: () => stock > 0,
+  decreaseStock: (qty) => {
+    stock -= qty 
+    console.log(`stock tersisa ${stock}`);
+  }
+})
 
+const hasDiscount = (discPercent) => ({
+  getDiscPrice: (price) => price - (price * discPercent / 100),
+})
+
+const hasBasicInfo = (productName, price) => ({
+  getInfo: () => `${productName} - ${price}`,
+})
+
+const createProduct = (productName, price, stock, discountPercent) => {
+  return {
+    ...hasStock(stock), 
+    ...hasDiscount(discountPercent), 
+    ...hasBasicInfo(productName, price),
+  }
+}
+// jadi kita bikin sesuai ability dari propertiesnya
+
+const camera = createProduct('Sony', 20000000, 19, 15); 
+console.log(camera.getDiscPrice(20000000));
+console.log(camera.getInfo());
+camera.decreaseStock(5);

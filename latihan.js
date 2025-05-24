@@ -22,7 +22,7 @@ function categorizeNumber(input) {
   } else if (input < 0) {
     return "Negatif";
   } else {
-    return "Nol";
+    return "Nol"
   }
 }
 console.log(categorizeNumber(15)); // Output: "Ganjil"
