@@ -204,3 +204,84 @@ const camera = createProduct('Sony', 20000000, 19, 15);
 console.log(camera.getDiscPrice(20000000));
 console.log(camera.getInfo());
 camera.decreaseStock(5);
+
+// functional programming 
+//
+// pure function -> ga ada efek samping, outputnya tergantung inputnya
+
+
+// immutability -> segala yg sudah dibuat ga boleh berubah nilainya
+// array.filter -> ngefilter array tanpa ngubah nilai aslinya -> instead ngubah kita duplikasi
+const students = [
+  {
+    namaPanggilan: 'Tilek',
+    score: 90
+  },
+  {
+    namaPanggilan: 'Udin',
+    score: 63
+  },
+  {
+    namaPanggilan: 'Sumingkem',
+    score: 85
+  },
+  {
+    namaPanggilan: 'Abe Cekut',
+    score: 77
+  },
+  {
+    namaPanggilan: 'Suyono',
+    score: 31
+  },
+]
+
+const eligibleStudents = students.filter((student) => student.score > 80); //* filter dari score
+console.log(eligibleStudents); // output -> [ { namaPanggilan: 'Tilek', score: 90 }, { namaPanggilan: 'Sumingkem', score: 85 }]
+
+// array.reduce() -> mengeksekusi fungsi reducer yg hanya mengembalikan 1 nilai saja 
+// strukturnya -> array.reduce(callback(accumulator, currentValue, [currentIndex], [array]), [initialValue])
+
+// contoh penggunaan 
+const totalScore = students.reduce((acc ,student) => acc + student.score, 0); // totalin semua scorenya 
+console.log(totalScore);
+
+// object.freeze() -> ngefreeze object sehingga kita ga dapet ngubah nilai property di dalemnya
+// contoh 
+const dataAnak = {
+  namaAnak: 'sutrisno', 
+  umurAnak: 12
+}
+
+Object.freeze(dataAnak); 
+dataAnak.namaAnak = 'ucup'; // bakal diabaikan
+console.log(dataAnak.namaAnak);
+
+//! tapi object.freeze itu cuma buat lapisan pertama, kalo mau lebih lanjut bisa pake rekursif 
+// contoh 
+const complexUser = {
+  name: 'Bob',
+  email: 'bob@dicoding.com',
+  preferences: {
+    newsletter: true,
+    notifications: 'weekly',
+    address: {
+      city: 'New York',
+      zip: '10001'
+    }
+  }
+}
+// di sini ada object level 2 yg mana property-nya object juga
+function deepFreeze(object){
+  console.log('Freezing:', object);
+  Object.keys(object).forEach((keyName) => {
+    const prop = object[keyName]; 
+    if (typeof prop == 'object' && prop !== null){
+      deepFreeze(prop); 
+    }
+  })
+  return Object.freeze(object);
+}
+deepFreeze(complexUser); 
+
+complexUser.preferences.address.city = 'Sleman'; // diabaikannn 
+console.log(complexUser.preferences.address.city);
