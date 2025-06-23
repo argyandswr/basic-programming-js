@@ -285,3 +285,91 @@ deepFreeze(complexUser);
 
 complexUser.preferences.address.city = 'Sleman'; // diabaikannn 
 console.log(complexUser.preferences.address.city);
+
+//asynchronous JS -> cara kita ngeehandle proses proses asynchronous yg ada di js
+
+function makeCoffee(callback) {
+  const estimationTime = 5000;
+
+  const inSecond = Math.ceil(estimationTime / 1000);
+  console.log(`Mohon menunggu. Pramusaji sedang membuatkan kopi dalam ${inSecond} detik`);
+
+  setTimeout(() => {
+    // Do some tasks to make coffee...
+    console.log('Pramusaji selesai membuat kopi.');
+
+    callback();
+  }, estimationTime);
+}
+console.log('Saya memesan kopi di kafe.');
+
+makeCoffee(() => {
+  console.log('Pramusaji memberikan kopi pesanan.');
+  console.log('Saya mendapatkan kopi dan menghabiskannya.');
+});
+
+//* Promise -> object khusus yg nentuin kegagalan/keberhasilann dr proses asynchronous
+/**
+  punya 3 buah state 
+  1. pending
+  2. rejected 
+  3. fulfilled
+**/
+
+//? Perbedaan sm callback gimana tuu
+
+//kode pake callback
+doSomething((doSomethingError, doSomethingData) => 
+{
+  if (doSomethingError){
+    console.log(doSomethingData);
+  }
+  console.log(doSomethingData);
+});
+
+//nah itu bisa disederhanakan pake promise
+function onFulfilled (doSomethingData){
+  // do ur jobs when "fulfilled" happens..
+  console.log(doSomethingData);
+}
+
+function onRejected(doSomethingError){
+  // do ur jobs when "rejected" happens..
+  console.log(doSomethingError); 
+}
+doSomething().then(onFulfilled,onRejected);
+// it becomes more readable
+
+function promiseExecutor(resolve, reject) {
+  const number = Math.random();
+
+  setTimeout(() => {
+    // Nilai fulfillment dari Promise
+    if (number > 0.5) {
+      resolve('You did it!');
+    }
+
+    // Nilai rejection dari Promise
+    else {
+      reject('Sorry, something went wrong!');
+    }
+  }, 2000);
+}
+
+export function doSomething() {
+  return new Promise(promiseExecutor); // nah ini bagian promise-nya di sinii
+}
+
+//* Async-Await -> cara yg sangat mantap buat ini semwahhh
+async function promiseWithAsyncAwait(){
+  console.log('start'); 
+  const result = await doSomething();  // jadi tinggal gini aja tapi cuma bisa dipake di dalam function 
+  console.log(result); 
+
+  console.log('and');
+}
+
+promiseWithAsyncAwait();
+
+
+
